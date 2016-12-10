@@ -17,7 +17,7 @@
 'use strict';
 
 var format = require('./format'),
-    i18n   = require('./i18n');
+  i18n   = require('./i18n');
 
 /**
  * Provides a Text Summary for profiles.
@@ -66,12 +66,12 @@ module.exports = function (lang) {
   function getCircumplexAdjective(p1, p2, order) {
     // Sort the personality traits in the order the JSON file stored it.
     var ordered = [p1, p2].sort(function (o1, o2) {
-      var
-        i1 = 'EANOC'.indexOf(o1.id.charAt(0)),
-        i2 = 'EANOC'.indexOf(o2.id.charAt(0));
+        var
+          i1 = 'EANOC'.indexOf(o1.id.charAt(0)),
+          i2 = 'EANOC'.indexOf(o2.id.charAt(0));
 
-      return i1 < i2 ? -1 : 1;
-    }),
+        return i1 < i2 ? -1 : 1;
+      }),
       // Assemble the identifier as the JSON file stored it.
       identifier = ordered[0].id.
       concat(ordered[0].percentage > 0.5 ? '_plus_' : '_minus_').
@@ -79,7 +79,7 @@ module.exports = function (lang) {
       concat(ordered[1].percentage > 0.5 ? '_plus' : '_minus'),
 
       traitMult = self.circumplexData[identifier][0],
-      sentence = "%s";
+      sentence = '%s';
 
     if (traitMult.perceived_negatively) {
       switch (order) {
@@ -267,7 +267,7 @@ module.exports = function (lang) {
         sentence = format(tphrase('You are relatively unconcerned with both %s and %s'), term1, term2) + '.';
         break;
       case 1:
-        sentence = format(tphrase("You don't find either %s or %s to be particularly motivating for you"), term1, term2) + '.';
+        sentence = format(tphrase('You don\'t find either %s or %s to be particularly motivating for you'), term1, term2) + '.';
         break;
       case 2:
         sentence = format(tphrase('You value both %s and %s a bit'), term1, term2) + '.';
@@ -290,7 +290,7 @@ module.exports = function (lang) {
           sentence = format(tphrase('You are relatively unconcerned with %s'), valuesInfo[i].term);
           break;
         case 1:
-          sentence = format(tphrase("You don't find %s to be particularly motivating for you"), valuesInfo[i].term);
+          sentence = format(tphrase('You don\'t find %s to be particularly motivating for you'), valuesInfo[i].term);
           break;
         case 2:
           sentence = format(tphrase('You value %s a bit more'),  valuesInfo[i].term);
@@ -345,7 +345,7 @@ module.exports = function (lang) {
       sentence = tphrase('Your choices are driven by a desire for %s');
       break;
     }
-    sentence = format(sentence, word).concat(".");
+    sentence = format(sentence, word).concat('.');
     sentences.push(sentence);
 
     return sentences;
@@ -376,7 +376,7 @@ module.exports = function (lang) {
    * @return A String containing the text summary.
    */
   function getSummary(profile) {
-    return assemble(profile.tree).map(function (paragraph) { return paragraph.join(" "); }).join("\n");
+    return assemble(profile.tree).map(function (paragraph) { return paragraph.join(' '); }).join('\n');
   }
 
   /* Text-Summary API */

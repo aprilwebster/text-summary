@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var format = require('./format');
+//var format = require('./format');
 
 /**
  * Creates translators
@@ -65,7 +65,7 @@ var translatorFactory = (function () {
         return function (key) {
           var value = self.getKey(translations, key, null);
           if (value === null) {
-            console.log(format('Pending translation for: %s', key));
+            //console.log(format('Pending translation for: %s', key));
             value = _this.getKey(defaults, key, key);
           }
           return value;
@@ -87,14 +87,14 @@ var translatorFactory = (function () {
     'use strict';
 
     var DEFAULT_LOCALE = 'en',
-        I18N_DIR = './i18n',
-        self = {
-          dictionaries: {
-            'en': require('./i18n/en'),
-            'es': require('./i18n/es'),
-            'ja': require('./i18n/ja')
-          }
-        };
+      //I18N_DIR = './i18n',
+      self = {
+        dictionaries: {
+          'en': require('./i18n/en'),
+          'es': require('./i18n/es'),
+          'ja': require('./i18n/ja')
+        }
+      };
 
 
     /**
@@ -123,8 +123,9 @@ var translatorFactory = (function () {
      * Get the appropiate dictionary file for user's locale.
      */
     self.getDictionary = function (locale) {
-      var locales = self.getLocaleOptions(locale),
-          dict;
+      //var locales = self.getLocaleOptions(locale),
+      //dict;
+      var locales = self.getLocaleOptions(locale);
 
 
       for (var i = 0; i < locales.length; i++) {
