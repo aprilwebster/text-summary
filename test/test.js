@@ -13,7 +13,7 @@ function ( data ) {
 //const assert = require('chai').assert;
 const testProfile = require('../examples/resources/profile');
 //const v3TestProfile = require('../examples/resources/v3_profile');
-const TextSummary  = require('../src/main');
+const TextSummary  = require('../lib/main');
 
 const textSummary = new TextSummary('en');
 const summary = textSummary.getSummary(testProfile);

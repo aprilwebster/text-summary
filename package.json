@@ -2,10 +2,10 @@
   "name": "personality-text-summary",
   "version": "1.0.2",
   "description": "Generate Text Summary for Personality Insights Profile",
-  "main": "src/main.js",
+  "main": "lib/main.js",
   "exportName": "TextSummary",
   "scripts": {
-    "compile": "node_modules/.bin/browserify -t [ babelify --presets [ es2015 ] ] --standalone TextSummry src/main.js -o dist/main.js",
+    "compile": "node_modules/.bin/browserify -t [ babelify --presets [ es2015 ] ] --standalone TextSummry lib/main.js -o dist/main.js",
     "prepublish": "npm run compile",
     "test": "npm run lint && npm run codecov",
     "lint": "eslint .",
