@@ -15,13 +15,15 @@
  */
 
 'use strict';
+/*eslint no-console: */
 
 class PersonalityProfile {
 
   constructor(profile) {
-    this._traits = profile.children[0].children[0];
-    this._needs = profile.children[1].children[0];
-    this._values = profile.children[2].children[0];
+    //console.log(JSON.stringify(profile,2,null));
+    this._traits = profile.tree.children[0].children;
+    this._needs = profile.tree.children[1].children[0];
+    this._values = profile.tree.children[2].children[0];
   }
 
   traits() {
