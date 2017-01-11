@@ -1,26 +1,20 @@
-/*
-function ( data ) {
-  var summary = new TextSummary('en'),
-      summaryText = summary.getSummary(data);
-  $('#textSummary').append(buildSummaryHtml(summaryText));
-
-  $('#profile').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
-});
-*/
 
 'use strict';
 /*eslint no-console: */
 const assert = require('chai').assert;
-const v2EnProfile = require('../examples/profiles/v2/en');
-const v2EsProfile = require('../examples/profiles/v2/es');
-//const v3TestProfile = require('../examples/resources/v3_profile');
-//const TextSummary  = require('../lib/main');
+
 const TextSummary = require('../lib/index');
 
-//const v3summary = textSummary.getSummary(v3TestProfile);
-//console.log(v3summary);
-//const textSummary = new TextSummary({ locale : 'es', 'version' : 'v2' });
-//const spanishSummary = textSummary.getSummary(testProfiles/);
+const v2EnProfile = require('./sample_profiles/v2/en');
+const v2EsProfile = require('./sample_profiles/v2/es');
+const v2JaProfile = require('./sample_profiles/v2/ja');
+
+const v2PersonalityProfile = require('../profiles/v2/index');
+var testPersonalityProfile = new v2PersonalityProfile(v2EnProfile);
+var traits = testPersonalityProfile.traits();
+
+console.log('TEST personality profile ' + traits[0].name);
+
 
 describe('Text Summary Tests', () => {
 
@@ -40,7 +34,7 @@ describe('Text Summary Tests', () => {
 
   it('Get default (Japanese) profile summary:', () => {
     const textSummary = new TextSummary({ locale : 'ja', 'version' : 'v2' });
-    const summary = textSummary.getSummary(v2EsProfile);
+    const summary = textSummary.getSummary(v2JaProfile);
     assert.equal(summary, '鋭敏なタイプであり、多少批判的なタイプであり、また独特なタイプです.\n自制心があるタイプです: 自分の欲望をコントロールできますし、強烈な欲望を持ちません. 温和なタイプです: 滅多に怒りません. また、自己主張が強いタイプです: 遠慮なく発言し、その場をリードする傾向があります。また、集団を統率できます.\n組織への帰属を意識して意思決定するタイプです.\n生活を楽しむことと成功することの両方にあまりこだわりません. 単なる個人の楽しみよりも大きな目標を伴う行動を優先します. また自分の才能を誇示することにあまり拘らず意思決定します.');
 
   });
