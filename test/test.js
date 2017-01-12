@@ -8,12 +8,38 @@ const TextSummary = require('../lib/index');
 const v2EnProfile = require('./sample_profiles/v2/en');
 const v2EsProfile = require('./sample_profiles/v2/es');
 const v2JaProfile = require('./sample_profiles/v2/ja');
-
 const v2PersonalityProfile = require('../profiles/v2/index');
-var testPersonalityProfile = new v2PersonalityProfile(v2EnProfile);
-var traits = testPersonalityProfile.traits();
 
-console.log('TEST personality profile ' + traits[0].name);
+const v3EnProfile = require('./sample_profiles/v3/en');
+//const v3EsProfile = require('./sample_profiles/v3/es');
+//const v3JaProfile = require('./sample_profiles/v3/ja');
+const v3PersonalityProfile = require('../profiles/v3/index');
+
+var v2TestPersonalityProfile = new v2PersonalityProfile(v2EnProfile);
+var v2Traits = v2TestPersonalityProfile.traits();
+
+console.log('V2 Profile Test:');
+v2Traits.forEach(function (t){
+  console.log(t.name + ': ' + t.score);
+
+  t.facets.forEach(function (f){
+    console.log('\t' + f.name + ': ' + f.score);
+  });
+
+});
+
+var v3TestPersonalityProfile = new v3PersonalityProfile(v3EnProfile);
+var v3Traits = v3TestPersonalityProfile.traits();
+
+console.log('V3 Profile Test:');
+v3Traits.forEach(function (t){
+  console.log(t.name + ': ' + t.score);
+
+  t.facets.forEach(function (f){
+    console.log('\t' + f.name + ': ' + f.score);
+  });
+
+});
 
 
 describe('Text Summary Tests', () => {
@@ -22,6 +48,8 @@ describe('Text Summary Tests', () => {
     const textSummary = new TextSummary({ locale : 'en', 'version' : 'v2' });
     const summary = textSummary.getSummary(v2EnProfile);
     assert.equal(summary, 'You are shrewd, somewhat critical and particular.\nYou are self-controlled: you have control over your desires, which are not particularly intense. You are mild-tempered: it takes a lot to get you angry. And you are assertive: you tend to speak up and take charge of situations, and you are comfortable leading groups.\nYour choices are driven by a desire for organization.\nYou are relatively unconcerned with both taking pleasure in life and achieving success. You prefer activities with a purpose greater than just personal enjoyment. And you make decisions with little regard for how they show off your talents.');
+
+
 
   });
 
