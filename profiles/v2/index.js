@@ -20,22 +20,66 @@
 class PersonalityProfile {
 
   constructor(profile) {
-    //console.log(JSON.stringify(profile,2,null));
-    this._traits = profile.tree.children[0].children;
+    this._traits = profile.tree.children[0].children[0].children;
     this._needs = profile.tree.children[1].children[0];
     this._values = profile.tree.children[2].children[0];
   }
 
-  traits() {
-    return this._traits;
+  traits(){
+    var traitsList = [];
+    this._traits.forEach(function (t) {
+
+      var facetsList = [];
+      t.children.forEach(function (facet) {
+        facetsList.push({
+          'id': facet.id,
+          'name': facet.name,
+          'category': facet.category,
+          'score': facet.percentage
+        });
+      });
+
+      var trait = {
+        'id': t.id,
+        'name': t.name,
+        'category': t.category,
+        'score': t.percentage,
+        'facets': facetsList
+      };
+      traitsList.push(trait);
+    });
+
+    return traitsList;
   }
 
   needs() {
-    return this._needs;
+    var needsList = [];
+    this._needs.forEach(function (n) {
+      var trait = {
+        'id': n.id,
+        'name': n.name,
+        'category': n.category,
+        'score': n.percentage,
+      };
+      needsList.push(trait);
+    });
+
+    return needsList;
   }
 
   values() {
-    return this._values;
+    var valuesList = [];
+    this._values.forEach(function (v) {
+      var trait = {
+        'id': v.id,
+        'name': v.name,
+        'category': v.category,
+        'score': v.percentage,
+      };
+      valuesList.push(trait);
+    });
+
+    return valuesList;
   }
 }
 
