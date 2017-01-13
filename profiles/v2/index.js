@@ -15,72 +15,58 @@
  */
 
 'use strict';
-/*eslint no-console: */
 
 class PersonalityProfile {
 
   constructor(profile) {
     this._traits = profile.tree.children[0].children[0].children;
-    this._needs = profile.tree.children[1].children[0];
-    this._values = profile.tree.children[2].children[0];
+    this._needs = profile.tree.children[1].children[0].children;
+    this._values = profile.tree.children[2].children[0].children;
   }
 
   traits(){
-    var traitsList = [];
-    this._traits.forEach(function (t) {
-
-      var facetsList = [];
-      t.children.forEach(function (facet) {
-        facetsList.push({
-          'id': facet.id,
-          'name': facet.name,
-          'category': facet.category,
-          'score': facet.percentage
-        });
-      });
-
-      var trait = {
-        'id': t.id,
-        'name': t.name,
-        'category': t.category,
-        'score': t.percentage,
-        'facets': facetsList
+    return this._traits.map(function(t) {
+      return {
+        id: t.id,
+        name: t.name,
+        category: t.category,
+        score: t.percentage,
+        facets: t.children.map(function(f) {
+          return {
+            //id: f.id,
+            id: f.id.replace('_', '-').replace(' ', '-'),
+            name: f.name,
+            category: f.category,
+            score: f.percentage
+          };
+        })
       };
-      traitsList.push(trait);
     });
-
-    return traitsList;
   }
 
   needs() {
-    var needsList = [];
-    this._needs.forEach(function (n) {
-      var trait = {
-        'id': n.id,
-        'name': n.name,
-        'category': n.category,
-        'score': n.percentage,
+    return this._needs.map(function(n) {
+      return {
+        id: n.id,
+        name: n.name,
+        category: n.category,
+        score: n.percentage
       };
-      needsList.push(trait);
     });
-
-    return needsList;
   }
 
   values() {
-    var valuesList = [];
-    this._values.forEach(function (v) {
-      var trait = {
-        'id': v.id,
-        'name': v.name,
-        'category': v.category,
-        'score': v.percentage,
+    return this._values.map(function(v) {
+      return {
+        //id: v.id,
+        id: v.id.replace('_', '-').replace(' ', '-'),
+        name: v.name,
+        category: v.category,
+        score: v.percentage
       };
-      valuesList.push(trait);
     });
-
-    return valuesList;
   }
+
 }
 
 module.exports = PersonalityProfile;
